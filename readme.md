@@ -1,9 +1,9 @@
-#天池新人赛【快来一起挖掘幸福感!】
+# 天池新人赛【快来一起挖掘幸福感!】
 <br></br>
 网址：https://tianchi.aliyun.com/competition/entrance/231702/information
 <hr>
 
-##数据清洗
+## 数据清洗
 1. happiness出现异常值,比较少,把出现异常的行删除
 2. 缺失值 使用中值代替
 3. 异常值 使用IsolationForest 删除异常数据
