@@ -171,9 +171,7 @@ def feature_choose(X):
     return np.delete(X,
                      [74, 17, 11, 73, 94,
                       70, 72, 18, 16, 64,
-                      59, 89, 71, 63, 15, 84,
-                      91, 61, 60, 69, 19, 4,
-                      14, 88, 42, 9, 57, 56], axis=1)
+                      59], axis=1)
 
 
 def rf_clf(train_x, train_y):
@@ -200,7 +198,7 @@ def svc_clf(train_x, train_y):
 
 
 def xgb_clf(train_x, train_y):
-    clf3 = xgb.XGBClassifier(n_estimators=400,
+    clf3 = xgb.XGBClassifier(n_estimators=500,
                              learning_rate=0.1,
                              n_jobs=8,
                              objective='multi:softmax',
@@ -214,23 +212,22 @@ def xgb_clf(train_x, train_y):
                              gamma=0.1,
                              min_child_weight=4
                              )
-    param = {"n_estimators": [200, 300, 400, 500]}
-    gsc = GridSearchCV(estimator=clf3,
-                       param_grid=param,
-                       n_jobs=8,
-                       scoring=my_score_func)
-    gsc.fit(train_x, train_y)
-    print(gsc.grid_scores_)
-    print(gsc.best_params_, gsc.best_score_)
-    # clf3.fit(train_x, train_y)
+    # param = {"max_depth": [6, 8, 10]}
+    # gsc = GridSearchCV(estimator=clf3,
+    #                    param_grid=param,
+    #                    n_jobs=8,
+    #                    scoring=my_score_func)
+    # gsc.fit(train_x, train_y)
+    # print(gsc.grid_scores_)
+    # print(gsc.best_params_, gsc.best_score_)
+    clf3.fit(train_x, train_y)
     #
     # # fig = plt.figure(figsize=(10, 10))
     # # ax = fig.subplots()
     # xgb.plot_tree(clf3, num_trees=1)
     # # clf3.fit(train_x, train_y)
     # plt.show()
-
-    return gsc.best_estimator_
+    return clf3
 
 
 def gbdt_clf(train_x, train_y):
@@ -366,5 +363,5 @@ plt.show()
 #
 # clf3 = stacking_clf(train_x, train_y)
 # test_data_y = clf3.predict(test_data_x)
-# output("5.csv", pd.DataFrame(data={"id": test_index, "happiness": test_data_y}))
+# output("6.csv", pd.DataFrame(data={"id": test_index, "happiness": test_data_y}))
 # xgb_clf(train_x, train_y)

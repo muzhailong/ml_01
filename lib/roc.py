@@ -32,21 +32,22 @@ def lift_curve_(result):
         plt.savefig("train.png")
         plt.show()
 
-    def roc_curve_(result):
-        result.columns = ['target', 'proba']
 
-        fpr, tpr, threshold = roc_curve(result['target'], result['proba'])  ###计算真正率和假正率  
-        roc_auc = auc(fpr, tpr)  ###计算auc的值  
-        plt.figure()
-        lw = 2
-        plt.figure(figsize=(10, 8))
-        plt.plot(fpr, tpr, color='darkorange',
-                 lw=lw, label='ROC curve (area = %0.2f)' % roc_auc)
-        plt.plot([0, 1], [0, 1], color='navy', lw=lw, linestyle='--')
-        plt.xlim([0.0, 1.0])
-        plt.ylim([0.0, 1.05])
-        plt.xlabel('False Positive Rate')
-        plt.ylabel('True Positive Rate')
-        plt.title('Roc Curve')
-        plt.legend(loc="lower right")
-        plt.show()
+def roc_curve_(result):
+    result.columns = ['target', 'proba']
+
+    fpr, tpr, threshold = roc_curve(result['target'], result['proba'])  ###计算真正率和假正率  
+    roc_auc = auc(fpr, tpr)  ###计算auc的值  
+    plt.figure()
+    lw = 2
+    plt.figure(figsize=(10, 8))
+    plt.plot(fpr, tpr, color='darkorange',
+             lw=lw, label='ROC curve (area = %0.2f)' % roc_auc)
+    plt.plot([0, 1], [0, 1], color='navy', lw=lw, linestyle='--')
+    plt.xlim([0.0, 1.0])
+    plt.ylim([0.0, 1.05])
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('Roc Curve')
+    plt.legend(loc="lower right")
+    plt.show()
